@@ -21,7 +21,10 @@ ament_auto_add_library(
   src/detection2d_overlay.cpp
   src/segmentation_overlay.cpp
   src/spatial_bb.cpp
-  src/wls_filter.cpp
+  # WLS filter disabled — requires opencv_contrib (ximgproc) which isn't
+  # in Jetson's apt packages. To re-enable: build OpenCV from source with
+  # -D OPENCV_EXTRA_MODULES_PATH=<opencv_contrib>/modules, then uncomment:
+  # src/wls_filter.cpp
   src/feature_tracker_overlay.cpp
   src/features_3d.cpp
   src/thermal_temp.cpp
@@ -31,7 +34,7 @@ rclcpp_components_register_nodes(${PROJECT_NAME}
   "depthai_filters::Detection2DOverlay")
 rclcpp_components_register_nodes(${PROJECT_NAME}
   "depthai_filters::SegmentationOverlay")
-rclcpp_components_register_nodes(${PROJECT_NAME} "depthai_filters::WLSFilter")
+# rclcpp_components_register_nodes(${PROJECT_NAME} "depthai_filters::WLSFilter")  # disabled, see above
 rclcpp_components_register_nodes(${PROJECT_NAME} "depthai_filters::SpatialBB")
 rclcpp_components_register_nodes(${PROJECT_NAME}
   "depthai_filters::FeatureTrackerOverlay")
